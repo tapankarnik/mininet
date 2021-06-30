@@ -569,9 +569,7 @@ class TCLink( Link ):
 
 class QTCLink(TCLink):
     "TCLink that makes a temporary switch to enable queue support alongside delay and bw"
-    def __init__(self, *args, **kwargs):
-        node1 = kwargs.pop('node1')
-        node2 = kwargs.pop('node2')
+    def __init__(self, node1, node2, **kwargs):
         temp_switch = OVSSwitch(name='temp_switch')
         TCLink.__init__(self, node1=node1, node2=temp_switch, **kwargs)
         TCLink.__init__(self, node1=temp_switch, node2=node2, **kwargs)
